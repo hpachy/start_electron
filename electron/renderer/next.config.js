@@ -1,9 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    output: 'export',
-    turbopack: {
-        root: __dirname,
+    output: 'export', // Génère le dossier /out
+    distDir: 'out',   // S'assure que le nom du dossier est correct
+    images: {
+        unoptimized: true, // Requis pour le mode export
     },
-};
+    // FORCE LES CHEMINS RELATIFS
+    assetPrefix: './',
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

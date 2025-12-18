@@ -24,13 +24,23 @@ function createWindow() {
 }
 
 // Auth
-ipcMain.handle('auth-login', (event, { username, password }) => {
-    if (username && password) {
-        token = 'fake-token'
-        return { success: true, token }
-    }
-    return { success: false }
+// ipcMain.handle('auth-login', (event, { username, password }) => {
+//     if (username && password) {
+//         token = 'fake-token'
+//         return { success: true, token }
+//     }
+//     return { success: false }
+// })
+let isAuthenticated = false
+
+ipcMain.handle('auth:login', (_, { username, password }) => {
+    console.log('je passe la')
+    if (!username || !password) return false
+    isAuthenticated = true
+    return true
 })
+
+ipcMain.handle('auth:status', () => isAuthenticated)
 
 // Todos CRUD
 ipcMain.handle('get-todos', () => todos)

@@ -5,8 +5,15 @@ export default function Home() {
     const [input, setInput] = useState('')
     const [pokemon, setPokemon] = useState(null)
 
+    const handleLogin = async () => {
+        const success = await window.api.login('hugo', 'mon-password');
+        console.log('Réponse du Main Process (success) :', success);
+
+        const status = await window.api.isAuthenticated();
+    }
+
+
     const addTodo = async () => {
-        console.log('addTodo triggered')
         const updated = await window.api.saveTodo({ text: input })
         setTodos(updated)
         setInput('')
@@ -17,13 +24,11 @@ export default function Home() {
         setPokemon(data)
     }
 
-    useEffect(() => {
-        console.log("Ceci doit apparaître dans l'inspecteur Electron !");
-    }, []);
-
     return (
         <div>
             <h1>Electron + Next.js. + console</h1>
+            <button onClick={handleLogin}>Login</button>
+
 
             <h2>Todo List</h2>
             <input value={input} onChange={e => setInput(e.target.value)} />
