@@ -9,19 +9,22 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Node.js
-node_modules/
-dist/
-build/
+# Node.js / Electron (monorepo)
+**/node_modules/
+**/dist/
+**/build/
+**/*.asar
+**/.next/
+**/out/
 
 # Python
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
-env/
-venv/
-ENV/
+**/env/
+**/venv/
+**/ENV/
 *.env
 
 # IDE / éditeurs
@@ -36,4 +39,3 @@ ENV/
 # Windows
 Thumbs.db
 ehthumbs.db
-electron/node_modules/
