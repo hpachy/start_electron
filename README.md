@@ -92,20 +92,22 @@ Système d’exploitation
 ## 🏗️ Architecture du projet
 
 ```
-.
-├── electron/
-│   ├── main.js            # Processus principal Electron
-│   ├── preload.js         # Pont sécurisé IPC
-│
-├── next-app/
-│   ├── app/               # Pages Next.js
-│   ├── components/        # Composants UI
-│   ├── services/          # Logique métier & IPC
-│   └── public/
-│
-├── out/                   # Build statique Next.js
-├── package.json
-└── README.md
+/app
+ ├─ /renderer      → Next.js (UI)
+ │   ├─ auth
+ │   ├─ todos
+ │   ├─ api (PokeAPI)
+ │
+ ├─ /main          → Electron Main
+ │   ├─ windows.ts
+ │   ├─ ipc/
+ │   │   ├─ auth.ipc.ts
+ │   │   ├─ todos.ipc.ts
+ │   └─ storage/
+ │
+ ├─ /preload
+ │   └─ index.ts
+
 ```
 
 ---
