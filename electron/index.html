@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Electron Renderer</h1>
+    <button id="btn">Ping Main</button>
+
+    <script>
+      document.getElementById("btn").addEventListener("click", async () => {
+        const res = await window.api.ping();
+        alert(res);
+      });
+    </script>
+  </body>
+</html>
