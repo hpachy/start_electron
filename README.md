@@ -192,11 +192,3 @@ npm run dist
 > **Electron = architecture (Renderer / Main / IPC)**
 > **Standalone = mode de déploiement**
 > **Next.js = interface utilisateur moderne**
-
----
-
-Si tu veux, je peux aussi te fournir :
-
-* un **template de repo**
-* une **version débutant**
-* ou un README **orienté sécurité IPC**
