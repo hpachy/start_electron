@@ -1,46 +1,71 @@
-# 🚀 Nextron Poké-Todo : Apprentissage Desktop Next.js + Electron
+# 🚀 My First Fullstack App : Auth, Todo & Poké-API
 
-Ce projet est un exercice pratique pour maîtriser la création d'applications desktop modernes. Nous utilisons **Next.js** pour l'interface utilisateur et **Electron** comme moteur d'exécution natif.
+Ce projet est un exercice d'apprentissage visant à maîtriser les trois piliers du développement web moderne : la gestion d'identité (**Auth**), la manipulation de données locales (**CRUD**) et la consommation de données distantes (**API**).
 
----
+## 🎯 Objectifs Pédagogiques
 
-## 🏗️ Architecture
-- **Frontend (Renderer) :** Next.js (React) avec Tailwind CSS.
-- **Backend Local (Main) :** Node.js via Electron pour la logique système.
-- **Communication :** IPC (Inter-Process Communication) via un script de `preload`.
-
----
-
-## 🎯 Objectifs de l'exercice
-
-### 1. Authentification Basique
-- Créer une page de login dans Next.js.
-- Envoyer les identifiants au processus Main via IPC.
-- Simuler une validation "admin/admin" côté Node.js.
-
-### 2. Liste Pokémon (Appel API)
-- Utiliser la `PokeAPI` pour récupérer les 151 premiers Pokémon.
-- Afficher les données sous forme de cartes élégantes avec les composants React.
-
-### 3. To-Do List Persistante
-- Ajouter/Supprimer des tâches.
-- **Défi Pro :** Sauvegarder la liste dans un fichier `.json` local sur l'ordinateur (via Node.js) pour qu'elle ne disparaisse pas au redémarrage.
+* **Authentification :** Comprendre le flux de connexion et la persistance d'une session (LocalStorage).
+* **Gestion d'État (CRUD) :** Manipuler une liste d'éléments (Ajouter, Lire, Modifier, Supprimer).
+* **Appels API :** Gérer les requêtes asynchrones avec `fetch` ou `axios`.
+* **Routing :** Protéger des routes pour qu'elles ne soient accessibles qu'aux utilisateurs connectés.
 
 ---
 
-## 📂 Structure du Projet (Cible)
+## 🛠️ Fonctionnalités
+
+### 1. Authentification (Basique)
+- Formulaire de connexion.
+- Stockage d'un faux token dans le `localStorage`.
+- Bouton de déconnexion pour nettoyer la session.
+
+### 2. Todo List (Maîtrise du State)
+- Ajout de tâches via un input.
+- Marquage d'une tâche comme "terminée".
+- Suppression d'une tâche.
+- *Bonus :* Filtrage par statut (Toutes / En cours / Terminées).
+
+### 3. Poké-Explorer (Communication API)
+- Appel à la [PokeAPI](https://pokeapi.co/).
+- Affichage d'un indicateur de chargement pendant la requête.
+- Rendu d'une liste de cartes Pokémon (Nom + Image).
+
+---
+
+## 🏗️ Architecture du Projet
+
 ```text
-├── main/               # Logique Electron (Node.js)
-│   └── main.js
-├── renderer/           # Application Next.js (React)
-│   ├── pages/
-│   └── components/
-├── preload.js          # Le pont sécurisé (Bridge)
-└── package.json
+src/
+├── components/        # Composants réutilisables (Button, Input, Card)
+├── views/             # Pages (Login, Dashboard, Pokedex)
+├── services/          # Appels API (pokemonService.js)
+├── hooks/             # Logique partagée (useAuth, useTodo)
+└── App.js             # Gestion du Routing
 ```
 ---
 
-## 🛠️ Commandes utiles
-npm run dev : Lance Next.js et Electron en mode développement.
+## 🚀 Installation et Lancement
+Cloner le dépôt
 
-npm run build : Exporte Next.js en statique et build l'exécutable (.exe ou .app).
+```Bash
+
+git clone [https://github.com/ton-pseudo/nom-du-projet.git](https://github.com/ton-pseudo/nom-du-projet.git)
+cd nom-du-projet
+```
+Installer les dépendances
+
+```Bash
+
+npm install
+```
+Lancer l'application
+
+```Bash
+
+npm start
+```
+---
+
+## 📚 Ressources utilisées
+Documentation NextJs.
+
+PokeAPI : https://pokeapi.co/
