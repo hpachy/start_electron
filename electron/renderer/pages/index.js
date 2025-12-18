@@ -26,7 +26,7 @@ export default function Home() {
 
     return (
         <div>
-            <h1>Electron + Next.js. + console</h1>
+            <h1>Electron + Next.js</h1>
             <button onClick={handleLogin}>Login</button>
 
 

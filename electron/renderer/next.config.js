@@ -1,12 +1,19 @@
+const { PHASE_DEVELOPMENT_SERVER } = require('next/dist/shared/lib/constants')
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    output: 'export', // Génère le dossier /out
-    distDir: 'out',   // S'assure que le nom du dossier est correct
-    images: {
-        unoptimized: true, // Requis pour le mode export
-    },
-    // FORCE LES CHEMINS RELATIFS
-    assetPrefix: './',
+const nextConfig = (phase) => {
+    const isDev = phase === PHASE_DEVELOPMENT_SERVER
+
+    return ({
+        images: {
+            unoptimized: true,
+        },
+        ...(!isDev && {
+            output: 'export',
+            distDir: 'out',
+            assetPrefix: './',
+        }),
+    })
 }
 
 module.exports = nextConfig

@@ -5,6 +5,8 @@ const path = require('path')
 const todos = []
 let token = null
 
+const isDev = process.env.EXPORT === 'true'
+
 function createWindow() {
     const win = new BrowserWindow({
         width: 800,
@@ -16,11 +18,19 @@ function createWindow() {
         }
     })
 
-    const indexPath = path.join(__dirname, '../renderer/out/index.html')
+    if (isDev) {
+        // On charge l'URL du serveur Next.js
+        win.loadURL('http://localhost:3000');
+        // Optionnel : ouvre l'inspecteur automatiquement en dev
+        win.webContents.openDevTools();
+    } else {
+        // En prod, on charge le fichier statique
+        const indexPath = path.join(__dirname, '../renderer/out/index.html')
 
-    win.loadFile(indexPath).catch(err => {
-        console.error("Erreur lors du chargement du fichier HTML:", err)
-    })
+        win.loadFile(indexPath).catch(err => {
+            console.error("Erreur lors du chargement du fichier HTML:", err)
+        })
+    }
 }
 
 // Auth
