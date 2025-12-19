@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "main": "./main/main.js",
     "scripts": {
+        "postinstall": "electron-rebuild",
         "start": "electron .",
         "next:dev": "cd renderer && npm run dev",
         "electron:dev": "wait-on http://localhost:3000 && EXPORT=true electron .",
@@ -11,6 +12,10 @@
     "devDependencies": {
         "electron": "^30.0.0",
         "electron-builder": "^26.0.12",
+        "electron-rebuild": "^3.2.9",
         "wait-on": "^9.0.3"
+    },
+    "dependencies": {
+        "better-sqlite3": "^12.5.0"
     }
 }

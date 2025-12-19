@@ -17,6 +17,14 @@ export default function Home() {
         console.log('Réponse du Main Process (isAuthenticated) :', status);
     }
 
+    const handleSignup = async () => {
+        const success = await window.api.signup('hugo', 'mon-password');
+        console.log('Réponse du Main Process (success) :', success);
+    }
+    const handleLogout = async () => {
+        const success = await window.api.logout();
+        console.log('Réponse du Main Process (logout) :', success);
+    }
 
     const addTodo = async () => {
         const updated = await window.api.addTodo({ text: input })
@@ -33,6 +41,9 @@ export default function Home() {
         <div>
             <h1>Electron + Next.js</h1>
             <button onClick={handleLogin}>Login</button>
+            <button onClick={handleSignup}>signup</button>
+            <button onClick={handleLogout}>logout</button>
+
 
 
             <h2>Todo List</h2>

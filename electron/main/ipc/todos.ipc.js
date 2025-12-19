@@ -1,12 +1,11 @@
-const { randomUUID } = require('crypto');
 const { ipcMain } = require('electron');
+const db = require('../db/database')
 
-let todos = []
 
 
 function registerTodosHandlers() {
     ipcMain.handle('todos:list', () => {
-        return todos
+        return db.prepare('SELECT * FROM todos').all()
     })
 
     ipcMain.handle('todos:add', (_, payload) => {
@@ -14,19 +13,13 @@ function registerTodosHandlers() {
         if (typeof text !== 'string' || !text.trim()) {
             throw new Error('Invalid todo')
         }
-
-        const todo = {
-            id: randomUUID(),
-            text: text.trim()
-        }
-
-        todos.push(todo)
-        return todos
+        db.prepare('INSERT INTO todos (text) VALUES (?)').run(text)
+        return db.prepare('SELECT * FROM todos').all()
     })
 
     ipcMain.handle('todos:remove', (_, id) => {
-        todos = todos.filter(t => t.id !== id)
-        return todos
+        db.prepare('DELETE FROM todos WHERE id = ?').run(id)
+        return db.prepare('SELECT * FROM todos').all()
     })
 }
 
