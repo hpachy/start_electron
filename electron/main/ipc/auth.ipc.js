@@ -1,9 +1,16 @@
+const { ipcMain } = require('electron')
+
 let isAuthenticated = false
 
-ipcMain.handle('auth:login', (_, { username, password }) => {
-    if (!username || !password) return false
-    isAuthenticated = true
-    return true
-})
+function registerAuthHandlers() {
+    ipcMain.handle('auth:login', (_, { username, password }) => {
+        console.log('Auth logic triggered')
+        if (!username || !password) return false
+        isAuthenticated = true
+        return true
+    })
 
-ipcMain.handle('auth:status', () => isAuthenticated)
+    ipcMain.handle('auth:status', () => isAuthenticated)
+}
+
+module.exports = { registerAuthHandlers }

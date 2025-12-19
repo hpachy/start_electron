@@ -5,22 +5,27 @@ export default function Home() {
     const [input, setInput] = useState('')
     const [pokemon, setPokemon] = useState(null)
 
+    useEffect(() => {
+        window.api.getTodos().then(setTodos)
+    }, [])
+
     const handleLogin = async () => {
         const success = await window.api.login('hugo', 'mon-password');
         console.log('Réponse du Main Process (success) :', success);
 
         const status = await window.api.isAuthenticated();
+        console.log('Réponse du Main Process (isAuthenticated) :', status);
     }
 
 
     const addTodo = async () => {
-        const updated = await window.api.saveTodo({ text: input })
+        const updated = await window.api.addTodo({ text: input })
         setTodos(updated)
         setInput('')
     }
 
     const fetchPokemon = async (name) => {
-        const data = await window.api.fetchPokemon(name)
+        const data = await window.api.fetchPokemon({ name })
         setPokemon(data)
     }
 

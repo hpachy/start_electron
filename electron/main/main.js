@@ -1,5 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
+const { registerAuthHandlers } = require('./ipc/auth.ipc')
+const { registerTodosHandlers } = require('./ipc/todos.ipc');
+const { pokemonHandlers } = require('./ipc/pokemon.ipc');
 
 
 const todos = []
@@ -34,40 +37,8 @@ function createWindow() {
 }
 
 // Auth
-// ipcMain.handle('auth-login', (event, { username, password }) => {
-//     if (username && password) {
-//         token = 'fake-token'
-//         return { success: true, token }
-//     }
-//     return { success: false }
-// })
-let isAuthenticated = false
-
-ipcMain.handle('auth:login', (_, { username, password }) => {
-    console.log('je passe la')
-    if (!username || !password) return false
-    isAuthenticated = true
-    return true
-})
-
-ipcMain.handle('auth:status', () => isAuthenticated)
-
-// Todos CRUD
-ipcMain.handle('get-todos', () => todos)
-ipcMain.handle('save-todo', (event, todo) => {
-    todos.push(todo)
-    return todos
-})
-
-// API externe (PokeAPI)
-ipcMain.handle('fetch-pokemon', async (event, name) => {
-    console.log('fetchPokemon triggered')
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`)
-    if (!res.ok) return null
-    console.log('fetchPokemon response received', await res.json())
-    return await res.json()
-})
-
-
+registerAuthHandlers()
+registerTodosHandlers()
+pokemonHandlers()
 
 app.whenReady().then(createWindow)
